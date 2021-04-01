@@ -100,13 +100,13 @@ void B2PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 //muon distrbution
   G4double  pi  = 3.14159265358979323846;
     G4double costheta = sqrt(sqrt(G4UniformRand()));
-    G4double phi=G4UniformRand()*pi;
+    G4double phi=2*G4UniformRand()*pi;
 
     G4double sintheta=sqrt(1-costheta*costheta);
 
     std::cout<<"costheta "<<costheta<<" phi "<<phi<<std::endl;
 
-    G4ThreeVector momentumDirection(sin(phi)*costheta,sin(phi)*sintheta,cos(phi));
+    G4ThreeVector momentumDirection(cos(phi)*sintheta,sin(phi)*sintheta,-costheta);
     fParticleGun->SetParticleMomentumDirection(momentumDirection);
 
 
