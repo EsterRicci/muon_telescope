@@ -89,7 +89,7 @@ void B2PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     G4cerr << "Perhaps you have changed geometry." << G4endl;
     G4cerr << "The gun will be place in the center." << G4endl;
   }
-  
+  /*
   //generate on a plane
   G4double xgen=-worldZHalfLength+2*worldZHalfLength* G4UniformRand();
   G4double ygen=-worldZHalfLength+2*worldZHalfLength* G4UniformRand();
@@ -108,7 +108,9 @@ void B2PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
     G4ThreeVector momentumDirection(cos(phi)*sintheta,sin(phi)*sintheta,-costheta);
     fParticleGun->SetParticleMomentumDirection(momentumDirection);
-
+*/
+  fParticleGun->SetParticlePosition(G4ThreeVector(0, 0, worldZHalfLength));
+  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,0.,-1.));
 
   fParticleGun->GeneratePrimaryVertex(anEvent);
 }

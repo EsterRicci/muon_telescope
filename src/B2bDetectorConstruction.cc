@@ -210,7 +210,7 @@ G4VPhysicalVolume* B2bDetectorConstruction::DefineVolumes()
 
   //telescope rotation
   G4RotationMatrix *rotation=new G4RotationMatrix; //define detector inclination
-    rotation->rotateY(10*deg);
+    rotation->rotateY(0*deg);
 
   G4Box* telescopeS
     = new G4Box("telescope",scintX*0.5,scintY*0.5,telescope_length*0.5);
