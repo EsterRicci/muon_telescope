@@ -40,6 +40,8 @@
 
 #include "Randomize.hh"
 
+#include <iostream>
+
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 B2PrimaryGeneratorAction::B2PrimaryGeneratorAction()
@@ -53,8 +55,9 @@ B2PrimaryGeneratorAction::B2PrimaryGeneratorAction()
   G4ParticleDefinition* particleDefinition 
     = G4ParticleTable::GetParticleTable()->FindParticle("mu-");
 
+    
+
   fParticleGun->SetParticleDefinition(particleDefinition);
-  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,0.,-1.));
   fParticleGun->SetParticleEnergy(4*GeV);
 }
 
@@ -86,8 +89,26 @@ void B2PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     G4cerr << "Perhaps you have changed geometry." << G4endl;
     G4cerr << "The gun will be place in the center." << G4endl;
   }
+  
+  //generate on a plane
+  G4double xgen=-worldZHalfLength+2*worldZHalfLength* G4UniformRand();
+  G4double ygen=-worldZHalfLength+2*worldZHalfLength* G4UniformRand();
 
-  fParticleGun->SetParticlePosition(G4ThreeVector(0., 0., worldZHalfLength));
+  fParticleGun->SetParticlePosition(G4ThreeVector(xgen, ygen, worldZHalfLength));
+
+
+//muon distrbution
+  G4double  pi  = 3.14159265358979323846;
+    G4double costheta = sqrt(sqrt(G4UniformRand()));
+    G4double phi=G4UniformRand()*pi;
+
+    G4double sintheta=sqrt(1-costheta*costheta);
+
+    std::cout<<"costheta "<<costheta<<" phi "<<phi<<std::endl;
+
+    G4ThreeVector momentumDirection(sin(phi)*costheta,sin(phi)*sintheta,cos(phi));
+    fParticleGun->SetParticleMomentumDirection(momentumDirection);
+
 
   fParticleGun->GeneratePrimaryVertex(anEvent);
 }
