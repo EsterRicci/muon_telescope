@@ -69,6 +69,12 @@ B2RunAction::B2RunAction()
 	analysisManager->CreateNtupleDColumn("Y_Scint2");
 	analysisManager->CreateNtupleDColumn("Y_Scint3");
 
+	analysisManager->CreateNtupleDColumn("X_gen");
+	analysisManager->CreateNtupleDColumn("Y_gen");
+
+	analysisManager->CreateNtupleDColumn("costheta");
+	analysisManager->CreateNtupleDColumn("phi");		
+
 	analysisManager->FinishNtuple();
 }
 
@@ -77,9 +83,7 @@ B2RunAction::B2RunAction()
 B2RunAction::~B2RunAction()
 {
 
-	G4AnalysisManager* man = G4AnalysisManager::Instance();
-    man->Write();
-    man->CloseFile();
+	
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -96,6 +100,11 @@ void B2RunAction::BeginOfRunAction(const G4Run*)
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 void B2RunAction::EndOfRunAction(const G4Run* )
-{}
+{
+
+	G4AnalysisManager* man = G4AnalysisManager::Instance();
+    man->Write();
+    man->CloseFile();
+}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
