@@ -81,7 +81,7 @@ G4bool B2TrackerSD::ProcessHits(G4Step* aStep,
   newHit->SetChamberNb(aStep->GetPreStepPoint()->GetTouchableHandle()
                                                ->GetCopyNumber());
   newHit->SetEdep(edep);
-  newHit->SetTime(aStep->GetPreStepPoint()->GetLocalTime());
+  newHit->SetTime(aStep->GetPreStepPoint()->GetGlobalTime());
   newHit->SetPos (aStep->GetPostStepPoint()->GetPosition());
 
   fHitsCollection->insert( newHit );
