@@ -43,6 +43,7 @@ B2RunAction::B2RunAction()
   //G4RunManager::GetRunManager()->SetPrintProgress(1000);     
 	G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
 	analysisManager->SetVerboseLevel(1);
+	analysisManager->SetDefaultFileType("root");
 	analysisManager->SetFileName("test");
 	analysisManager->SetFirstNtupleId(1);
 	analysisManager->SetFirstHistoId(1);
