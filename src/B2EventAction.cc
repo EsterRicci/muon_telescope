@@ -90,9 +90,12 @@ void B2EventAction::EndOfEventAction(const G4Event* event)
   G4double X_Scint[4];
   G4double Y_Scint[4];
 
+  G4int counts[4];
+
   for(int iS=0;iS<4;++iS){
     Edep_Scint[iS]=0.;
     Time_Scint[iS]=0.;
+    counts[iS]=0;
   }
 
   for(int iH=0;iH<hc->GetSize();++iH){
@@ -101,11 +104,12 @@ void B2EventAction::EndOfEventAction(const G4Event* event)
     Time_Scint[hit->GetChamberNb()]+=hit->GetTime();
     X_Scint[hit->GetChamberNb()]+=hit->GetPos().getX();
     Y_Scint[hit->GetChamberNb()]+=hit->GetPos().getY();
+    ++counts[hit->GetChamberNb()]
   }
   for(int iS=0;iS<4;++iS){
-    Time_Scint[iS]/=hc->GetSize();
-    X_Scint[iS]/=hc->GetSize();
-    Y_Scint[iS]/=hc->GetSize();
+    Time_Scint[iS]/=counts[iS];//hc->GetSize();
+    X_Scint[iS]/=counts[iS];//hc->GetSize();
+    Y_Scint[iS]/=counts[iS];//hc->GetSize();
   }
 
 
