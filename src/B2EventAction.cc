@@ -104,7 +104,7 @@ void B2EventAction::EndOfEventAction(const G4Event* event)
     Time_Scint[hit->GetChamberNb()]+=hit->GetTime();
     X_Scint[hit->GetChamberNb()]+=hit->GetPos().getX();
     Y_Scint[hit->GetChamberNb()]+=hit->GetPos().getY();
-    ++counts[hit->GetChamberNb()]
+    ++counts[hit->GetChamberNb()];
   }
   for(int iS=0;iS<4;++iS){
     Time_Scint[iS]/=counts[iS];//hc->GetSize();
