@@ -69,7 +69,8 @@ class B2bDetectorConstruction : public G4VUserDetectorConstruction
     // data members
     G4LogicalVolume*   fLogicTarget;     // pointer to the logical Target
     G4LogicalVolume*   fLogicChamber;    // pointer to the logical Chamber
-
+    
+    G4Material*        fWorldMaterial;  // pointer to the world material
     G4Material*        fTargetMaterial;  // pointer to the target  material
     G4Material*        fChamberMaterial; // pointer to the chamber material
 

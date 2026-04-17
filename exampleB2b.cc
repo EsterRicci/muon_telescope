@@ -38,6 +38,8 @@
 
 #include "G4UImanager.hh"
 #include "FTFP_BERT.hh"
+#include "G4OpticalPhysics.hh"
+#include "G4EmStandardPhysics_option4.hh"
 #include "G4StepLimiterPhysics.hh"
 
 #include "Randomize.hh"
@@ -70,9 +72,18 @@ int main(int argc,char** argv)
   // Set mandatory initialization classes
   //
   runManager->SetUserInitialization(new B2bDetectorConstruction());
-
+  /*
+  //Physics list NO OPTICS
   G4VModularPhysicsList* physicsList = new FTFP_BERT;
   physicsList->RegisterPhysics(new G4StepLimiterPhysics());
+  runManager->SetUserInitialization(physicsList);
+  */
+
+  // Physics list WITH OPTICS
+  G4VModularPhysicsList* physicsList = new FTFP_BERT;
+  physicsList->ReplacePhysics(new G4EmStandardPhysics_option4());
+  auto opticalPhysics = new G4OpticalPhysics();
+  //physicsList->RegisterPhysics(opticalPhysics); // Uncomment to activate optical physics
   runManager->SetUserInitialization(physicsList);
     
   // Set user action classes
